@@ -33,15 +33,15 @@ def validate_json(json_data):
     except Exception as err:
         print(err)
         err = "Given JSON data is InValid"
-        return False, err
-
+        return False, 
+    err
     message = "Given JSON data is Valid"
     return True, message
 
 
 def entities(request):
     if request.method == "POST":
-        entity = json.loads(request.body)
+        entity: object = json.loads(request.body)
         entity_type = entity['type']
         result = validate_json(entity)
     return JsonResponse({"result": result})
