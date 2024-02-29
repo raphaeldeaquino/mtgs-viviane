@@ -10,7 +10,9 @@ from django.http import JsonResponse
 #Em um HttpRequestobjeto, os atributos GETe POSTsão instâncias de django.http.QueryDict,
 # uma classe semelhante a um dicionário personalizada para lidar com vários valores para a mesma chave.
 # Isso é necessário porque alguns elementos de formulário HTML, principalmente, passam vários valores para a mesma chave.<select multiple>
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 
 def get_schema(json_data):
     """This function loads the given schema available"""
@@ -33,15 +35,15 @@ def validate_json(json_data):
     except Exception as err:
         print(err)
         err = "Given JSON data is InValid"
-        return False, err
-
+        return False, 
+    # err
     message = "Given JSON data is Valid"
     return True, message
 
 
 def entities(request):
     if request.method == "POST":
-        entity = json.loads(request.body)
+        entity: object = json.loads(request.body)
         entity_type = entity['type']
         result = validate_json(entity)
     return JsonResponse({"result": result})
