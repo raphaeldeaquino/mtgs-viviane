@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "$schemaVersion": "0.0.2",
+    "modelTags": "",
+    "$id": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/SoftwareApplication/schema.json",
+    "title": "Smart Planning - Software Application schema",
+    "description": "Information on a given Software Application",
+    "basedOn": "https://schema.org/SoftwareApplication",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+        },
+        {
+            "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
+        },
+        {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Software Application"
+                    ],
+                    "description": "Property. Smart Planning Entity type"
+                },
+                "applicationCategory": {
+                    "type": "Text",
+                    "description": "Property. Type of software application, e.g. 'Game, Multimedia'."
+                },
+                "featureList": {
+                    "type": "Text",
+                    "description": "Property. Features or modules provided by this application (and possibly required by other applications)."
+                },
+                "memoryRequirements": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Property. Minimum memory requirements."
+                },
+                "processorRequirements": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Property. Minimum processor requirements."
+                },
+                "storageRequirements": {
+                    "type": "number",
+                    "minimum": 0,
+                    "description": "Property. Storage requirements (free space required)."
+                },
+                "softwareRequirements": {
+                    "type": "Text",
+                    "description": "Property. Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime)."
+                }
+            }
+        }
+    ],
+    "required": [
+        "type",
+        "id",
+        "address"
+    ]
+}

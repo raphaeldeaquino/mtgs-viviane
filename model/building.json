@@ -1,0 +1,100 @@
+{
+  "id": "building-a85e3da145c1",
+  "type": "Building",
+  "category": {
+    "type": "StructuredValue",
+    "value": [
+      "industrial"
+    ]
+  },
+  "floorsBelowGround": {
+    "type": "Boolean",
+    "value": false
+  },
+  "description": {
+    "type": "Text",
+    "value": "Industry block"
+  },
+  "floorsAboveGround": {
+    "type": "Number",
+    "value": 1
+  },
+  "occupier": {
+    "type": "StructuredValue",
+    "value": [
+      "9830f692-7677-11e6-838b-4f9fb3dc5a4f"
+    ]
+  },
+  "dateCreated": {
+    "type": "DateTime",
+    "value": "2024-02-08T10:18:16Z"
+  },
+  "location": {
+    "type": "geo:json",
+    "value": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            1
+          ],
+          [
+            100,
+            1
+          ],
+          [
+            100,
+            0
+          ]
+        ]
+      ]
+    }
+  },
+  "address": {
+    "type": "StructuredValue",
+    "value": {
+      "addressLocality": "London",
+      "postalCode": "EC4N 8AF",
+      "streetAddress": "25 Walbrook"
+    }
+  },
+  "containedInPlace": {
+    "type": "geo:json",
+    "value": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            100,
+            0
+          ],
+          [
+            101,
+            0
+          ],
+          [
+            101,
+            1
+          ],
+          [
+            100,
+            1
+          ],
+          [
+            100,
+            0
+          ]
+        ]
+      ]
+    }
+  }
+}

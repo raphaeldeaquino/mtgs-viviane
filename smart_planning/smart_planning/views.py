@@ -17,7 +17,7 @@ def get_schema(json_data):
     type = json_data["type"]
     current_path = os.path.dirname(__file__)
     parent_path = os.path.abspath(os.path.join(current_path, os.pardir))
-    schema_file = parent_path + '/dataModel/'+type+'/schema.json'
+    schema_file = parent_path + '/dataModel/' + type + '/schema.json'
     with open(schema_file, 'r') as file:
         schema = json.load(file)
     return schema

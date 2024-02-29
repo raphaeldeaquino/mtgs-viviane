@@ -2,7 +2,8 @@
     "$schema": "http://json-schema.org/schema#",
     "$schemaVersion": "0.0.2",
     "modelTags": "",
-    "$id": "https://smart-data-models.github.io/dataModel.Building/Building/schema.json",
+    "$id": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/Building/schema.json",
+    "basedOn": "https://smart-data-models.github.io/dataModel.Building/Building/schema.json",
     "title": "Smart Data Models- Building schema",
     "description": "Information on a given Building",
     "type": "object",
@@ -28,68 +29,7 @@
                     "items": {
                         "type": "string",
                         "enum": [
-                            "apartments",
-                            "bakehouse",
-                            "barn",
-                            "bridge",
-                            "bungalow",
-                            "bunker",
-                            "cathedral",
-                            "cabin",
-                            "carport",
-                            "chapel",
-                            "church",
-                            "civic",
-                            "commercial",
-                            "conservatory",
-                            "construction",
-                            "cowshed",
-                            "detached",
-                            "digester",
-                            "dormitory",
-                            "farm",
-                            "farm_auxiliary",
-                            "garage",
-                            "garages",
-                            "garbage_shed",
-                            "grandstand",
-                            "greenhouse",
-                            "hangar",
-                            "hospital",
-                            "hotel",
-                            "house",
-                            "houseboat",
-                            "hut",
-                            "industrial",
-                            "kindergarten",
-                            "kiosk",
-                            "mosque",
-                            "office",
-                            "parking",
-                            "pavilion",
-                            "public",
-                            "residential",
-                            "retail",
-                            "riding_hall",
-                            "roof",
-                            "ruins",
-                            "school",
-                            "service",
-                            "shed",
-                            "shrine",
-                            "stable",
-                            "stadium",
-                            "static_caravan",
-                            "sty",
-                            "synagogue",
-                            "temple",
-                            "terrace",
-                            "train_station",
-                            "transformer_tower",
-                            "transportation",
-                            "university",
-                            "warehouse",
-                            "water_tower"
+                            "industrial"
                         ]
                     }
                 },
@@ -97,19 +37,9 @@
                     "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons/properties/location"
                 },
                 "occupier": {
-                    "type": "array",
+                    "type": "string",
                     "description": "Relationship. Person or entity using the building. Model:'https://schema.org/URL'",
-                    "items": {
-                        "oneOf": [
-                            {
-                                "type": "string",
-                                "format": "uri"
-                            },
-                            {
-                                "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/EntityIdentifierType"
-                            }
-                        ]
-                    }
+                    "format": "uri"
                 },
                 "floorsAboveGround": {
                     "type": "integer",
@@ -118,23 +48,6 @@
                 "floorsBelowGround": {
                     "type": "integer",
                     "description": "Property. Floors below the ground level. Model:'https://schema.org/Number'"
-                },
-                "refMap": {
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "minLength": 1,
-                            "maxLength": 256,
-                            "pattern": "^[\\w\\-\\.\\{\\}\\$\\+\\*\\[\\]`|~^@!,:\\\\]+$",
-                            "description": "Property. Identifier format of any NGSI entity"
-                        },
-                        {
-                            "type": "string",
-                            "format": "uri",
-                            "description": "Property. Identifier format of any NGSI entity"
-                        }
-                    ],
-                    "description": "Relationship. Reference to the map containing the building"
                 },
                 "openingHours": {
                     "type": "array",
@@ -166,6 +79,6 @@
         "type",
         "id",
         "category",
-        "address"
+        "location"
     ]
 }
