@@ -10,6 +10,17 @@
     "id": {
       "type": "string"
     },
+    "category": {
+          "type": "array",
+          "description": "Property. Category of the graph. Enum:'Information Flow, Infrastructure Flow'",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Information Flow",
+              "Infrastructure Flow"
+            ]
+          }
+        },
     "label": {
       "type": "string"
     },
@@ -18,9 +29,6 @@
         "boolean"
       ],
       "default": true
-    },
-    "type": {
-      "type": "string"
     },
     "metadata": {
       "type": [
@@ -88,6 +96,7 @@
   },
   "required": [
     "id",
-    "type"
+    "type",
+    "category"
   ]
 }

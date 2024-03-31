@@ -25,5 +25,5 @@ def main():
 if __name__ == '__main__':
     database_controller = DatabaseController()
     database_controller.create_schema()
-    sel_heuristic(['room01'], [], [], [])
+    #sel_heuristic(['room01'], ["temperature-control-application01"], [], [])
     main()

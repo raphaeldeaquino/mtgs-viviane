@@ -6,7 +6,13 @@ curl -X POST http://localhost:8000/entities \
 echo -e "\n\nSalvando rooms:"
 curl -X POST http://localhost:8000/entities \
    -H "Content-Type: application/json" \
-   --data @room.json
+   --data @room-01.json
+curl -X POST http://localhost:8000/entities \
+   -H "Content-Type: application/json" \
+   --data @room-02.json
+curl -X POST http://localhost:8000/entities \
+   -H "Content-Type: application/json" \
+   --data @room-03.json
 
 echo -e "\n\nSalvando aplicação:"
 curl -X POST http://localhost:8000/entities \

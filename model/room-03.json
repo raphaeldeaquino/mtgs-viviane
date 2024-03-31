@@ -1,0 +1,37 @@
+{
+  "id": "room03",
+  "type": "Room",
+  "description": "Third room in Volga industry",
+  "containedInBuilding": "volga",
+  "floorLevel": 1,
+  "floorSize": 10,
+  "peopleCapacity": 100,
+  "peopleOccupancy": 50,
+  "location": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -16.827243,
+          -49.218947
+        ],
+        [
+          -16.827767,
+          -49.218942
+        ],
+        [
+          -16.827798,
+          -49.219392
+        ],
+        [
+          -16.827254,
+          -49.219403
+        ],
+        [
+          -16.827243,
+          -49.218947
+        ]
+      ]
+    ]
+  }
+}

@@ -26,15 +26,6 @@
         "containedInBuilding": {
           "type": "string"
         },
-        "candidateLocations": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "number"
-            }
-          }
-        },
         "floorLevel": {
           "type": "number",
           "description": "Property. The floor level for an Accommodation in a multi-storey building. Since counting systems vary internationally, the local system should be used where possible."
@@ -59,7 +50,6 @@
   "required": [
     "type",
     "id",
-    "location",
-    "candidateLocations"
+    "location"
   ]
 }

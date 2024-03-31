@@ -25,12 +25,21 @@
         },
         "category": {
           "type": "array",
-          "description": "Property. Category of the building. Enum:'apartments, bakehouse, barn, bridge, bungalow, bunker, cathedral, cabin, carport, chapel, church, civic, commercial, conservatory, construction, cowshed, detached, digester, dormitory, farm, farm_auxiliary, garage, garages, garbage_shed, grandstand, greenhouse, hangar, hospital, hotel, house, houseboat, hut, industrial, kindergarten, kiosk, mosque, office, parking, pavilion, public, residential, retail, riding_hall, roof, ruins, school, service, shed, shrine, stable, stadium, static_caravan, sty, synagogue, temple, terrace, train_station, transformer_tower, transportation, university, warehouse, water_tower'",
+          "description": "Property. Category of the building. Enum:'industrial'",
           "items": {
             "type": "string",
             "enum": [
               "industrial"
             ]
+          }
+        },
+        "candidateLocations": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
           }
         },
         "floorsAboveGround": {
@@ -65,6 +74,7 @@
     "type",
     "id",
     "category",
-    "location"
+    "location",
+    "candidateLocations"
   ]
 }

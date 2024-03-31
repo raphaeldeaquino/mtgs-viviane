@@ -1,0 +1,37 @@
+{
+  "id": "room02",
+  "type": "Room",
+  "description": "Second room in Volga industry",
+  "containedInBuilding": "volga",
+  "floorLevel": 1,
+  "floorSize": 10,
+  "peopleCapacity": 100,
+  "peopleOccupancy": 50,
+  "location": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -16.826761,
+          -49.218475
+        ],
+        [
+          -16.827192,
+          -49.218437
+        ],
+        [
+          -16.827238,
+          -49.219408
+        ],
+        [
+          -16.826766,
+          -49.219414
+        ],
+        [
+          -16.826761,
+          -49.218475
+        ]
+      ]
+    ]
+  }
+}
