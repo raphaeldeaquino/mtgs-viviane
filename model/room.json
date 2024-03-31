@@ -1,22 +1,16 @@
 {
-  "id": "room-a85e3da145c1",
+  "id": "room01",
   "type": "Room",
-  "floorsBelowGround": {
-    "type": "Boolean",
-    "value": false
-  },
-  "description": {
-    "type": "Text",
-    "value": "Industry block"
-  },
-  "floorSize": {
-    "type": "Number",
-    "value": 60
-  },
-  "dateCreated": {
-    "type": "DateTime",
-    "value": "2024-02-08T10:18:16Z"
-  },
+  "description": "Main room in Volga industry",
+  "containedInBuilding": "volga",
+  "candidateLocations": [
+    [10, 20],
+    [10, 20]
+  ],
+  "floorLevel": 1,
+  "floorSize": 10,
+  "peopleCapacity": 100,
+  "peopleOccupancy": 50,
   "location": {
     "type": "geo:json",
     "value": {
@@ -45,14 +39,6 @@
           ]
         ]
       ]
-    }
-  },
-  "address": {
-    "type": "StructuredValue",
-    "value": {
-      "addressLocality": "London",
-      "postalCode": "EC4N 8AF",
-      "streetAddress": "25 Walbrook"
     }
   }
 }

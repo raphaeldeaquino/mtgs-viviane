@@ -1,0 +1,44 @@
+{
+  "id": "info-flow01",
+  "type": "Graph",
+  "category": "Information Flow",
+  "label": "Information flow for temperature control application",
+  "nodes": {
+    "info1-1-1a": {
+      "metadata": {
+        "weight": 384000,
+        "role": "application_data",
+        "attribute": ["humidity sensing", "temperature sensing"]
+      }
+    },
+    "info1-1-1b": {
+      "metadata": {
+        "weight": 80000000,
+        "role": "middleware_data"
+      }
+    },
+    "info1-1-1c": {
+      "metadata": {
+        "weight": 16000000,
+        "role": "application_data",
+        "attribute": ["temperature control model"]
+      }
+    }
+  },
+  "edges": [
+    {
+      "source": "info1-1-1a",
+      "target": "info1-1-1b",
+      "metadata": {
+        "weight": 128000
+      }
+    },
+    {
+      "source": "info1-1-1b",
+      "target": "info1-1-1c",
+      "metadata": {
+        "weight": 3600000
+      }
+    }
+  ]
+}

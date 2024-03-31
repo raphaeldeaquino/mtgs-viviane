@@ -2,9 +2,9 @@ from collections import defaultdict
 
 
 class Graph(object):
-    """ Graph data structure, undirected by default. """
+    """ Graph data structure,directed by default. """
 
-    def __init__(self, connections, directed=False):
+    def __init__(self, connections, directed=True):
         self._graph = defaultdict(set)
         self._directed = directed
         self.add_connections(connections)

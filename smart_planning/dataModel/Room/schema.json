@@ -1,72 +1,65 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "$schemaVersion": "0.0.2",
-    "modelTags": "",
-    "$id": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/Room/schema.json",
-    "title": "Smart Planning - Room schema",
-    "description": "Information on a given Room",
-    "basedOn": "https://schema.org/Room",
-    "type": "object",
-    "allOf": [
-        {
-            "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+  "$schema": "http://json-schema.org/schema#",
+  "$schemaVersion": "0.0.2",
+  "modelTags": "",
+  "$id": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/Room/schema.json",
+  "basedOn": "https://schema.org/Room",
+  "title": "Smart Planning - Room schema",
+  "description": "Information on a given Room",
+  "type": "object",
+  "allOf": [
+    {
+      "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
+    },
+    {
+      "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
+    },
+    {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Room"
+          ],
+          "description": "Property. NGSI Entity type"
         },
-        {
-            "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/Location-Commons"
+        "containedInBuilding": {
+          "$ref": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/Building/schema.json"
         },
-        {
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "Room"
-                    ],
-                    "description": "Property. Smart Planning Entity type"
-                },
-                "containedInBuilding": {
-                    "$ref": "https://github.com/smart-data-models/dataModel.Building/blob/bd38c4ab4844147a7732f76cf31f1e0826309ed2/Building/schema.json"
-                },
-                "floorLevel": {
-                    "type": "Text",
-                    "description": "Property. The floor level for an Accommodation in a multi-storey building. Since counting systems vary internationally, the local system should be used where possible."
-                },
-                "floorSize": {
-                    "type": "number",
-                    "description": "Property. The size of the accommodation. Unit: square meter, Unit code: MTK.  Model:'https://schema.org/Number'"
-                },
-                "refMap": {
-                    "anyOf": [
-                        {
-                            "type": "string",
-                            "minLength": 1,
-                            "maxLength": 256,
-                            "pattern": "^[\\w\\-\\.\\{\\}\\$\\+\\*\\[\\]`|~^@!,:\\\\]+$",
-                            "description": "Property. Identifier format of any NGSI entity"
-                        },
-                        {
-                            "type": "string",
-                            "format": "uri",
-                            "description": "Property. Identifier format of any NGSI entity"
-                        }
-                    ],
-                    "description": "Relationship. Reference to the map containing the room"
-                },
-                "peopleCapacity": {
-                    "type": "number",
-                    "minimum": 0,
-                    "description": "Property. Model:'https://schema.org/Number'. Allowed people present at the room"
-                },
-                "peopleOccupancy": {
-                    "type": "number",
-                    "minimum": 0,
-                    "description": "Property. Model:'https://schema.org/Number'. People present at the room"
-                }
+        "candidateLocations": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
             }
+          }
+        },
+        "floorLevel": {
+          "type": "number",
+          "description": "Property. The floor level for an Accommodation in a multi-storey building. Since counting systems vary internationally, the local system should be used where possible."
+        },
+        "floorSize": {
+          "type": "number",
+          "description": "Property. The size of the accommodation. Unit: square meter, Unit code: MTK.  Model:'https://schema.org/Number'"
+        },
+        "peopleCapacity": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Property. Model:'https://schema.org/Number'. Allowed people present at the room"
+        },
+        "peopleOccupancy": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Property. Model:'https://schema.org/Number'. People present at the room"
         }
-    ],
-    "required": [
-        "type",
-        "id",
-        "address"
-    ]
+      }
+    }
+  ],
+  "required": [
+    "type",
+    "id",
+    "location",
+    "candidateLocations"
+  ]
 }

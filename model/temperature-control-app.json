@@ -1,0 +1,8 @@
+{
+  "id": "temperature-control-application01",
+  "type": "SoftwareApplication",
+  "applicationCategory": "Temperature Control",
+  "memoryRequirements": 16000,
+  "processorRequirements": 80000000,
+  "storageRequirements": 256000
+}

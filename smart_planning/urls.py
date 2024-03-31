@@ -18,7 +18,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('v2/entities', entities),
-    path('v2/entities/<str:id>', get_entity),
+    path('entities', entities),
+    path('entities/<str:id>', get_entity),
 ]
