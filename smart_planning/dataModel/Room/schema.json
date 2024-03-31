@@ -24,7 +24,7 @@
           "description": "Property. NGSI Entity type"
         },
         "containedInBuilding": {
-          "$ref": "https://github.com/raphaeldeaquino/mtgs-viviane/blob/main/smart_planning/dataModel/Building/schema.json"
+          "type": "string"
         },
         "candidateLocations": {
           "type": "array",

@@ -4,41 +4,44 @@
   "description": "Main room in Volga industry",
   "containedInBuilding": "volga",
   "candidateLocations": [
-    [10, 20],
-    [10, 20]
+    [
+      100,
+      20
+    ],
+    [
+      10,
+      20
+    ]
   ],
   "floorLevel": 1,
   "floorSize": 10,
   "peopleCapacity": 100,
   "peopleOccupancy": 50,
   "location": {
-    "type": "geo:json",
-    "value": {
-      "type": "Polygon",
-      "coordinates": [
+    "type": "Polygon",
+    "coordinates": [
+      [
         [
-          [
-            100,
-            0
-          ],
-          [
-            101,
-            0
-          ],
-          [
-            101,
-            1
-          ],
-          [
-            100,
-            1
-          ],
-          [
-            100,
-            0
-          ]
+          0,
+          0
+        ],
+        [
+          150,
+          0
+        ],
+        [
+          150,
+          50
+        ],
+        [
+          0,
+          50
+        ],
+        [
+          0,
+          0
         ]
       ]
-    }
+    ]
   }
 }
