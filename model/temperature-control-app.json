@@ -1,6 +1,7 @@
 {
-  "id": "temperature-control-application01",
+  "id": "temperature-control-application",
   "type": "SoftwareApplication",
+  "deploymentRoom": "room-01",
   "applicationCategory": "Temperature Control",
   "memoryRequirements": 16000,
   "processorRequirements": 80000000,

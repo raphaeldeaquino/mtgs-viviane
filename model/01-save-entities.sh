@@ -1,7 +1,7 @@
 echo "Salvando building:"
 curl -X POST http://localhost:8000/entities \
    -H "Content-Type: application/json" \
-   --data @building.json
+   --data @volga.json
 
 echo -e "\n\nSalvando rooms:"
 curl -X POST http://localhost:8000/entities \
@@ -24,12 +24,13 @@ curl -X POST http://localhost:8000/entities \
    -H "Content-Type: application/json" \
    --data @info-flow-01.json
 
-echo -e "\n\nSalvando primeiro fluxo de infraestrutura:"
+echo -e "\n\nSalvando fluxos de infraestrutura:"
 curl -X POST http://localhost:8000/entities \
    -H "Content-Type: application/json" \
    --data @ifr-flow-01.json
-
-echo -e "\n\nSalvando segundo fluxo de infraestrutura:"
 curl -X POST http://localhost:8000/entities \
    -H "Content-Type: application/json" \
    --data @ifr-flow-02.json
+curl -X POST http://localhost:8000/entities \
+   -H "Content-Type: application/json" \
+   --data @ifr-flow-03.json

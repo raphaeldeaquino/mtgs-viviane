@@ -24,7 +24,8 @@
           "description": "Property. NGSI Entity type"
         },
         "containedInBuilding": {
-          "type": "string"
+          "type": "string",
+          "description": "Property. Building id where the room is contained"
         },
         "floorLevel": {
           "type": "number",
@@ -50,6 +51,7 @@
   "required": [
     "type",
     "id",
+    "containedInBuilding",
     "location"
   ]
 }

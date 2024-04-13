@@ -16,7 +16,9 @@ class InformationFlow:
             self.category = "Information Flow"
             self.description = flow_dict["description"] if "description" in flow_dict else None
             self.label = flow_dict["label"] if "label" in flow_dict else None
-
+            metadata = flow_dict["metadata"]
+            self.depĺoyment_room = metadata["deploymentRoom"]
+            self.application = ["application"]
             self.flow_representation = Graph()
             self.flow_representation.add_nodes(flow_dict["nodes"])
             self.flow_representation.add_edges(flow_dict["edges"])

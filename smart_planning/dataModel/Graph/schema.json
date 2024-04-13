@@ -5,21 +5,22 @@
   "title": "Graph Schema",
   "properties": {
     "type": {
-      "type": "string"
-    },
+          "type": "string",
+          "enum": [
+            "Graph"
+          ],
+          "description": "Property. NGSI Entity type"
+        },
     "id": {
       "type": "string"
     },
     "category": {
-          "type": "array",
+          "type": "string",
           "description": "Property. Category of the graph. Enum:'Information Flow, Infrastructure Flow'",
-          "items": {
-            "type": "string",
-            "enum": [
+          "enum": [
               "Information Flow",
               "Infrastructure Flow"
             ]
-          }
         },
     "label": {
       "type": "string"

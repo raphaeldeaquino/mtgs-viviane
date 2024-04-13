@@ -1,8 +1,14 @@
 {
-  "id": "ifr-flow02",
+  "id": "ifr-flow-02",
   "type": "Graph",
   "category": "Infrastructure Flow",
   "label": "Second infrastructure flow for temperature control application",
+  "metadata": {
+    "deploymentRoom": "room-01",
+    "application": "temperature-control-application",
+    "informationFlow": "info-flow-01",
+    "precisionModel": 0.6
+  },
   "nodes": {
     "ifr1-1-1-2a": {
       "metadata": {
@@ -13,30 +19,32 @@
         "r_sen": 30
       }
     },
-    "info1-1-1-2b": {
+    "ifr1-1-1-2b": {
       "metadata": {
         "weight": 2500000000,
         "role": "network",
         "r_tr": 46
       }
     },
-    "info1-1-1-2c": {
+    "ifr1-1-1-2c": {
       "metadata": {
         "weight": 2500000000,
         "role": "network",
         "r_tr": 46
       }
     },
-    "info1-1-1-2d": {
+    "ifr1-1-1-2d": {
       "metadata": {
         "weight": 32000000000,
-        "role": "compute"
+        "role": "compute",
+        "r_tr": 46
       }
     },
-    "info1-1-1-2e": {
+    "ifr1-1-1-2e": {
       "metadata": {
         "weight": 16000000,
-        "role": "compute"
+        "role": "compute",
+        "r_tr": 46
       }
     }
   },

@@ -38,7 +38,7 @@
           "items": {
             "type": "array",
             "items": {
-              "type": "number"
+              "type": "object"
             }
           }
         },

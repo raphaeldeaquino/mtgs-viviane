@@ -16,7 +16,11 @@ class InfrastructureFlow:
             self.category = "Infrastructure Flow"
             self.description = flow_dict["description"] if "description" in flow_dict else None
             self.label = flow_dict["label"] if "label" in flow_dict else None
-
+            metadata = flow_dict["metadata"]
+            self.deployment_room = metadata["deploymentRoom"]
+            self.application = ["application"]
+            self.information_flow = metadata["informationFlow"]
+            self.precision_model = metadata["precisionModel"]
             self.flow_representation = Graph()
             self.flow_representation.add_nodes(flow_dict["nodes"])
             self.flow_representation.add_edges(flow_dict["edges"])
@@ -30,3 +34,11 @@ class InfrastructureFlow:
         for node in nodes:
             if nodes[node]["role"] == "sensor":
                 sensors.append({node: nodes[node]})
+
+        return sensors
+
+    def get_nodes(self):
+        return self.flow_representation.get_nodes()
+
+    def get_edges(self):
+        return self.flow_representation.get_edges()

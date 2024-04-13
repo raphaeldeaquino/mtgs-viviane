@@ -1,5 +1,5 @@
 {
-  "id": "room03",
+  "id": "room-03",
   "type": "Room",
   "description": "Third room in Volga industry",
   "containedInBuilding": "volga",

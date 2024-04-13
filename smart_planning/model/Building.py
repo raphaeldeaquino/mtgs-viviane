@@ -36,6 +36,8 @@ class Building:
         for par in points:
             point = Point(par)
             if not polygon_shapely.contains(point):
+                print(polygon_shapely)
+                print(point)
                 return False
 
         return True

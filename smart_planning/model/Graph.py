@@ -34,6 +34,18 @@ class Graph(object):
 
         self._connections[node1].add(node2)
 
+    def get_edges(self):
+        edges = []
+
+        for source in list(self._connections.keys()):
+            target_set = self._connections[source]
+            for target in target_set:
+                edges.append({"source": source,
+                              "target": target,
+                              "metadata": self._edge_metadata[(source, target)]})
+
+        return edges
+
     def remove(self, node):
         """ Remove all references to node """
 

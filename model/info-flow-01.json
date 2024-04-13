@@ -1,8 +1,12 @@
 {
-  "id": "info-flow01",
+  "id": "info-flow-01",
   "type": "Graph",
   "category": "Information Flow",
   "label": "Information flow for temperature control application",
+  "metadata": {
+    "deploymentRoom": "room-01",
+    "application": "temperature-control-application"
+  },
   "nodes": {
     "info1-1-1a": {
       "metadata": {

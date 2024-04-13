@@ -7,46 +7,57 @@
   "title": "Smart Planning - Software Application schema",
   "description": "Information on a given Software Application",
   "type": "object",
-  "properties": {
-    "type": {
-      "type": "string",
-      "enum": [
-        "SoftwareApplication"
-      ],
-      "description": "Property. Smart Planning Entity type"
+  "allOf": [
+    {
+      "$ref": "https://smart-data-models.github.io/data-models/common-schema.json#/definitions/GSMA-Commons"
     },
-    "applicationCategory": {
-      "type": "string",
-      "description": "Property. Type of software application, e.g. 'Game, Multimedia'."
-    },
-    "featureList": {
-      "type": [
-        "string"
-      ],
-      "description": "Property. Features or modules provided by this application (and possibly required by other applications)."
-    },
-    "memoryRequirements": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Property. Minimum memory requirements."
-    },
-    "processorRequirements": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Property. Minimum processor requirements."
-    },
-    "storageRequirements": {
-      "type": "number",
-      "minimum": 0,
-      "description": "Property. Storage requirements (free space required)."
-    },
-    "softwareRequirements": {
-      "type": [
-        "string"
-      ],
-      "description": "Property. Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime)."
+    {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "SoftwareApplication"
+          ],
+          "description": "Property. Smart Planning Entity type"
+        },
+        "deploymentRoom": {
+          "type": "string",
+          "description": "Property. Room id where the application must be deployed"
+        },
+        "applicationCategory": {
+          "type": "string",
+          "description": "Property. Type of software application, e.g. 'Game, Multimedia'."
+        },
+        "featureList": {
+          "type": [
+            "string"
+          ],
+          "description": "Property. Features or modules provided by this application (and possibly required by other applications)."
+        },
+        "memoryRequirements": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Property. Minimum memory requirements."
+        },
+        "processorRequirements": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Property. Minimum processor requirements."
+        },
+        "storageRequirements": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Property. Storage requirements (free space required)."
+        },
+        "softwareRequirements": {
+          "type": [
+            "string"
+          ],
+          "description": "Property. Component dependency requirements for application. This includes runtime environments and shared libraries that are not included in the application distribution package, but required to run the application (examples: DirectX, Java or .NET runtime)."
+        }
+      }
     }
-  },
+  ],
   "required": [
     "type",
     "id"
