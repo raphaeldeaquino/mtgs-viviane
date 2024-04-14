@@ -1,6 +1,6 @@
 import os  # Função para interagir com o S.O. (criar, identificar, buscar e remover um diretório, etc.)
 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # django usa objetos de solicitação de resposta para passar o estado pelo sistema JsonResponse cria respostas JSON Em
 # um HttpRequestobjeto, os atributos GETe POSTsão instâncias de django.http.QueryDict, uma classe semelhante a um
 # dicionário personalizada para lidar com vários valores para a mesma chave. Isso é necessário porque alguns
@@ -11,6 +11,9 @@ from jsonschema import \
 # ... " properties" : { ... " preço" : {"tipo" : "número"}, ... "
 import sys, traceback
 from .controller.DatabaseController import *
+from .sel import *
+from .rm import *
+
 
 @csrf_exempt
 def get_schema(json_data):
@@ -60,6 +63,26 @@ def entities(request):
             message = result[1]
 
     return JsonResponse({"success": return_value, "message": message})
+
+
+def get_planning(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    industry_id = body['industry_id']
+    rooms_list = body['rooms_list']
+    apps_list = body['apps_list']
+    info_flows_list = body['info_flows_list']
+    ifr_flows_list = body['ifr_flows_list']
+    service_utility_pruning = body['service_utility_pruning']
+    communication_coverage_pruning = body['communication_coverage_pruning']
+    eff_weight = body['eff_weight']
+    cov_weight = body['cov_weight']
+
+    mifs = sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows_list, service_utility_pruning,
+                         communication_coverage_pruning)
+    mapping = rm_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows_list, mifs, eff_weight,
+                           cov_weight)
+    return HttpResponse(json.dumps(mapping))
 
 
 def get_entity(request, id):

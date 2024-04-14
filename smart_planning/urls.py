@@ -20,4 +20,5 @@ from .views import *
 urlpatterns = [
     path('entities', entities),
     path('entities/<str:id>', get_entity),
+    path('planning', get_planning)
 ]

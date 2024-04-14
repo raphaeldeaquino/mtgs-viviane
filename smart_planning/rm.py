@@ -125,4 +125,4 @@ def rm_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows_
 
                 candidate_deployments.append(option)
     candidate_deployments = sorted(candidate_deployments, key=lambda x: x["reusabilityIndex"], reverse=True)
-    print(candidate_deployments[0])
+    return candidate_deployments[0]
