@@ -1,0 +1,68 @@
+{
+  "id": "info-flow-02",
+  "type": "Graph",
+  "category": "Information Flow",
+  "label": "Information flow for energy monitoring application",
+  "metadata": {
+    "deploymentRoom": "room-01",
+    "application": "energy-monitoring-application"
+  },
+  "nodes": {
+    "info1-2-1a": {
+      "metadata": {
+        "weight": 384000,
+        "role": "application_data",
+        "attribute": [
+          "energy usage"
+        ]
+      }
+    },
+    "info1-2-1b": {
+      "metadata": {
+        "weight": 384000,
+        "role": "application_data",
+        "attribute": [
+          "energy usage"
+        ]
+      }
+    },
+    "info1-2-1c": {
+      "metadata": {
+        "weight": 80000000,
+        "role": "middleware_data"
+      }
+    },
+    "info1-2-1d": {
+      "metadata": {
+        "weight": 16000000,
+        "role": "application_data",
+        "attribute": [
+          "energy monitoring model"
+        ]
+      }
+    }
+  },
+  "edges": [
+    {
+      "source": "info1-2-1a",
+      "target": "info1-2-1c",
+      "metadata": {
+        "weight": 128000
+      }
+    },
+    {
+      "source": "info1-2-1b",
+      "target": "info1-2-1c",
+      "metadata": {
+        "weight": 128000
+      }
+    },
+    {
+      "source": "info1-2-1c",
+      "target": "info1-2-1d",
+      "metadata": {
+        "weight": 3600000
+      }
+    }
+  ]
+}

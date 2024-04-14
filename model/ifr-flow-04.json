@@ -1,25 +1,32 @@
 {
-  "id": "ifr-flow-01",
+  "id": "ifr-flow-04",
   "type": "Graph",
   "category": "Infrastructure Flow",
-  "label": "First infrastructure flow for temperature control application",
+  "label": "Infrastructure flow for energy monitoring application",
   "metadata": {
     "deploymentRoom": "room-01",
-    "application": "temperature-control-application",
-    "informationFlow": "info-flow-01",
+    "application": "energy-monitoring-application",
+    "informationFlow": "info-flow-02",
     "precisionModel": 0.6
   },
   "nodes": {
-    "ifr1-1-1-1a": {
+    "ifr1-2-1-1a": {
       "metadata": {
         "weight": 120000,
         "role": "sensor",
         "attribute": [
-          "humidity",
-          "temperature"
+          "energy"
         ],
         "r_tr": 30,
         "r_sen": 30,
+        "operationalCost": 12.3
+      }
+    },
+    "ifr1-2-1-1b": {
+      "metadata": {
+        "weight": 32000000000,
+        "role": "compute",
+        "r_tr": 46,
         "operationalCost": 12.3,
         "location": [
           -16.826622,
@@ -27,7 +34,7 @@
         ]
       }
     },
-    "ifr1-1-1-1b": {
+    "ifr1-2-1-1c": {
       "metadata": {
         "weight": 2500000000,
         "role": "network",
@@ -35,7 +42,7 @@
         "operationalCost": 12.3
       }
     },
-    "ifr1-1-1-1c": {
+    "ifr1-2-1-1d": {
       "metadata": {
         "weight": 32000000000,
         "role": "compute",
@@ -46,15 +53,22 @@
   },
   "edges": [
     {
-      "source": "ifr1-1-1-1a",
-      "target": "ifr1-1-1-1b",
+      "source": "ifr1-2-1-1a",
+      "target": "ifr1-2-1-1c",
       "metadata": {
         "weight": 256000
       }
     },
     {
-      "source": "ifr1-1-1-1b",
-      "target": "ifr1-1-1-1c",
+      "source": "ifr1-2-1-1b",
+      "target": "ifr1-2-1-1c",
+      "metadata": {
+        "weight": 256000
+      }
+    },
+    {
+      "source": "ifr1-2-1-1c",
+      "target": "ifr1-2-1-1d",
       "metadata": {
         "weight": 450000000
       }

@@ -12,7 +12,10 @@
       "metadata": {
         "weight": 384000,
         "role": "application_data",
-        "attribute": ["humidity sensing", "temperature sensing"]
+        "attribute": [
+          "humidity sensing",
+          "temperature sensing"
+        ]
       }
     },
     "info1-1-1b": {
@@ -25,7 +28,9 @@
       "metadata": {
         "weight": 16000000,
         "role": "application_data",
-        "attribute": ["temperature control model"]
+        "attribute": [
+          "temperature control model"
+        ]
       }
     }
   },

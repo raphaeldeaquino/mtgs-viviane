@@ -1,0 +1,9 @@
+{
+  "id": "energy-monitoring-application",
+  "type": "SoftwareApplication",
+  "deploymentRoom": "room-01",
+  "applicationCategory": "Energy Control",
+  "memoryRequirements": 32000,
+  "processorRequirements": 160000000,
+  "storageRequirements": 512000
+}
