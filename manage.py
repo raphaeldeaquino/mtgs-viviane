@@ -4,6 +4,7 @@ import sys
 from logging.config import fileConfig
 from smart_planning.controller.DatabaseController import *
 from smart_planning.sel import *
+from smart_planning.rm import *
 
 fileConfig('smart_planning/config/logging_config.ini')
 
@@ -25,7 +26,6 @@ def main():
 if __name__ == '__main__':
     database_controller = DatabaseController()
     database_controller.create_schema()
-    sel_heuristic('volga', ["room-01", "room-02", "room-03"],
-                  ["temperature-control-application"], ["info-flow-01"],
-                  ["ifr-flow-01", "ifr-flow-02", "ifr-flow-03"], 20, 10)
+    mifs = sel_heuristic('volga', ["room-01", "room-02", "room-03"], ["temperature-control-application", "energy-monitoring-application"], ["info-flow-01", "info-flow-02"], ["ifr-flow-01", "ifr-flow-02", "ifr-flow-03", "ifr-flow-04"], 20, 10)
+    rm_heuristic('volga', ["room-01", "room-02", "room-03"], ["temperature-control-application", "energy-monitoring-application"], ["info-flow-01", "info-flow-02"], ["ifr-flow-01", "ifr-flow-02", "ifr-flow-03", "ifr-flow-04"], mifs, 0.5, 0.5)
     #main()

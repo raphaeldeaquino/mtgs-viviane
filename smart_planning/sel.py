@@ -1,13 +1,9 @@
-import json
 import warnings
 import itertools
 import math
-from math import radians, cos, sin, atan2
-from shapely.geometry import Polygon, Point
 from shapely.ops import transform
 from functools import partial
 from geopy.distance import geodesic
-from haversine import haversine, Unit
 import pyproj
 
 from .controller.DatabaseController import *
@@ -76,12 +72,7 @@ def overlapping_area(infra1, infra2):
     return circle1.intersection(circle2).area
 
 
-def check_communication_coverage(ifr_flow, mifs):
-    infra_tr = {}
-    nodes = ifr_flow.get_nodes()
-    for node in nodes:
-        infra_tr[node] = nodes[node]['r_tr']
-
+def check_communication_coverage(infra_tr, mifs):
     adapted_mifs = []
     for mif in mifs:
         total_area = 0
@@ -89,15 +80,15 @@ def check_communication_coverage(ifr_flow, mifs):
         brokers = [{k: mif['mif'][k]} for k in mif['mif']]
 
         for i, infra1 in enumerate(brokers):
-            infra_location = list(infra1.values())[0]
+            infra_location = list(infra1.values())[0]['location']
 
             broker1 = {'lat': infra_location[0],
                        'lon': infra_location[1],
                        'range': infra_tr[list(infra1.keys())[0]]}
             total_area += coverage_area(broker1)
-            
+
             for infra2 in brokers[i + 1:]:
-                infra_location = list(infra2.values())[0]
+                infra_location = list(infra2.values())[0]['location']
 
                 broker2 = {'lat': infra_location[0],
                            'lon': infra_location[1],
@@ -115,6 +106,11 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
     database_controller = DatabaseController()
     geo_mapping = {}
     mifs = {}
+    nodes_role = {}
+    nodes_r_tr = {}
+    nodes_r_sen = {}
+    nodes_op_cost = {}
+    deployed_nodes = []
 
     industry_object = database_controller.get_entity(industry_id, "Building")
     industry_dict = json.loads(industry_object[2])
@@ -166,10 +162,11 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
 
                 for node in nodes:
                     for candidate_location in candidate_locations:
-                        if check_inner(location, candidate_location) or \
-                                (nodes[node]['role'] == 'sensor' and check_sensor_coverage(location,
-                                                                                           candidate_location,
-                                                                                           nodes[node]['r_sen'])):
+                        if check_inner(location, candidate_location['location']) or \
+                                (nodes[node]['role'] == 'sensor' and
+                                 check_sensor_coverage(location,
+                                                       candidate_location['location'],
+                                                       nodes[node]['r_sen'])):
                             if node not in geo_mapping[room.id][ifr_flow.id]:
                                 geo_mapping[room.id][ifr_flow.id][node] = []
                             geo_mapping[room.id][ifr_flow.id][node].append(candidate_location)
@@ -188,21 +185,41 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
                 ifr_flow_sensors = ifr_flow.get_sensors()
                 ifr_flow_edges = ifr_flow.get_edges()
 
+                for node in ifr_flow_nodes:
+                    nodes_role[node] = ifr_flow_nodes[node]['role']
+                    nodes_op_cost[node] = ifr_flow_nodes[node]['operationalCost']
+                    nodes_r_tr[node] = ifr_flow_nodes[node]['r_tr']
+                    nodes_r_sen[node] = ifr_flow_nodes[node]['r_sen'] if 'r_sen' in ifr_flow_nodes[node] else None
+                    if 'location' in ifr_flow_nodes[node]:
+                        deployed_nodes.append(node)
+
                 keys = list(geo_mapping[room.id][ifr_flow.id].keys())
                 values_lists = list(geo_mapping[room.id][ifr_flow.id].values())
                 combinations = list(itertools.product(*values_lists))
                 result = []
                 for combo in combinations:
                     result_dict = {keys[i]: combo[i] for i in range(len(keys))}
-                    result.append(result_dict)
-                mifs[room.id][ifr_flow.id] = []
+                    result_dict2 = {}
+                    for node in result_dict:
+                        if node in deployed_nodes:
+                            deploy_cost = 0.0
+                        else:
+                            deploy_cost = result_dict[node]['deployCost'][nodes_role[node]]
+                        result_dict2[node] = {'deployCost': deploy_cost,
+                                              'operationalCost': nodes_op_cost[node],
+                                              'r_tr': nodes_r_tr[node],
+                                              'r_sen': nodes_r_sen[node],
+                                              'location': result_dict[node]['location']}
+                    result.append(result_dict2)
+
+                mifs[room.id][ifr_flow.application] = []
                 for mif in result:
                     connected = True
                     for edge in ifr_flow_edges:
                         source = edge['source']
                         target = edge['target']
-                        source_location = mif[source]
-                        target_location = mif[target]
+                        source_location = mif[source]['location']
+                        target_location = mif[target]['location']
                         source_r_tr = ifr_flow_nodes[source]['r_tr']
                         target_r_tr = ifr_flow_nodes[target]['r_tr']
                         distance = geodesic(source_location, target_location).meters
@@ -210,34 +227,34 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
                             connected = False
                             break
                     if not connected:
-                        mifs[room.id][ifr_flow.id].append({'mif': mif, 'utility': 0})
+                        mifs[room.id][ifr_flow.application].append({'mif': mif, 'utility': 0})
                     else:
                         covered = True
                         for sensor in ifr_flow_sensors:
-                            sensor_location = mif[list(sensor.keys())[0]]
+                            sensor_location = mif[list(sensor.keys())[0]]['location']
                             r_sen = list(sensor.values())[0]['r_sen']
                             distance = geodesic(centroid_location, sensor_location).meters
                             if distance > r_sen:
                                 covered = False
                                 break
                         if not covered:
-                            mifs[room.id][ifr_flow.id].append({'mif': mif, 'utility': 0})
+                            mifs[room.id][ifr_flow.application].append({'mif': mif, 'utility': 0})
                         else:
                             detection_prob = 0.0
                             for sensor in ifr_flow_sensors:
-                                sensor_location = mif[list(sensor.keys())[0]]
+                                sensor_location = mif[list(sensor.keys())[0]]['location']
                                 distance = geodesic(centroid_location, sensor_location).meters
                                 detection_prob = detection_prob + math.pow(math.e, -1 * distance)
                             detection_prob = detection_prob / len(ifr_flow_sensors)
                             utility = ifr_flow.precision_model * detection_prob
-                            mifs[room.id][ifr_flow.id].append({'mif': mif, 'utility': utility})
+                            mifs[room.id][ifr_flow.application].append({'mif': mif, 'utility': utility})
 
     pruned_mifs = {}
     for room in mifs:
         pruned_mifs[room] = {}
-        for flow in mifs[room]:
+        for app in mifs[room]:
             # Ordena para pegar somente os melhores
-            flow_mifs = sorted(mifs[room][flow], key=lambda x: x['utility'], reverse=True)
+            flow_mifs = sorted(mifs[room][app], key=lambda x: x['utility'], reverse=True)
 
             # Remove os mifs com utility 0
             flow_mifs = [item for item in flow_mifs if item['utility'] > 0]
@@ -246,7 +263,7 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
             flow_mifs = flow_mifs[:min(service_utility_pruning, len(flow_mifs))]
 
             # Para cada mif determina a área de cobertura
-            flow_mifs = check_communication_coverage(ifr_flow_by_id[flow], flow_mifs)
+            flow_mifs = check_communication_coverage(nodes_r_tr, flow_mifs)
 
             # Ordena para pegar somente os melhores
             flow_mifs = sorted(flow_mifs, key=lambda x: x['coverage'], reverse=True)
@@ -254,6 +271,6 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
             # Faz a poda para pegar os M melhores. Checa o mínimo porque pode ter restado menos que N
             flow_mifs = flow_mifs[:min(communication_coverage_pruning, len(flow_mifs))]
 
-            pruned_mifs[room][flow] = flow_mifs
+            pruned_mifs[room][app] = flow_mifs
 
-    return pruned_mifs['room-01']['ifr-flow-02']
+    return pruned_mifs

@@ -25,8 +25,8 @@ class Building:
             self.openingHours = building_dict["openingHours"] if "openingHours" in building_dict else None
             self.peopleCapacity = building_dict["peopleCapacity"] if "peopleCapacity" in building_dict else None
             self.peopleOccupancy = building_dict["peopleOccupancy"] if "peopleOccupancy" in building_dict else None
-        except KeyError:
-            raise ValueError("Invalid room dictionary")
+        except KeyError as e:
+            raise ValueError(f"Invalid room dictionary: {e} not found")
 
     def is_valid_candidate_locations(self, points):
         # Convertendo as coordenadas do polígono GeoJSON para o formato suportado pelo Shapely.
@@ -34,7 +34,7 @@ class Building:
 
         # Verificando se cada par de números está dentro do polígono.
         for par in points:
-            point = Point(par)
+            point = Point(par['location'])
             if not polygon_shapely.contains(point):
                 print(polygon_shapely)
                 print(point)

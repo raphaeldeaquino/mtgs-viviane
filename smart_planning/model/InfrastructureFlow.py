@@ -18,7 +18,7 @@ class InfrastructureFlow:
             self.label = flow_dict["label"] if "label" in flow_dict else None
             metadata = flow_dict["metadata"]
             self.deployment_room = metadata["deploymentRoom"]
-            self.application = ["application"]
+            self.application = metadata["application"]
             self.information_flow = metadata["informationFlow"]
             self.precision_model = metadata["precisionModel"]
             self.flow_representation = Graph()
