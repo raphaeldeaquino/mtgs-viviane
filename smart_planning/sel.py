@@ -19,7 +19,7 @@ warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 def check_sensor_coverage(polygon, sensor_location, sensor_range):
     # Converte as coordenadas do polígono em uma forma geométrica Shapely
-    polygon_shape = Polygon(polygon.coordinates)
+    polygon_shape = Polygon(polygon.industry_coordinates)
 
     # Converte as coordenadas do sensor para um objeto Point Shapely
     sensor_point = Point(sensor_location)
@@ -49,7 +49,7 @@ def check_sensor_coverage(polygon, sensor_location, sensor_range):
 
 def check_inner(polygon, location):
     # Converte as coordenadas do polígono em uma forma geométrica Shapely
-    polygon_shape = Polygon(polygon.coordinates)
+    polygon_shape = Polygon(polygon.industry_coordinates)
 
     # Converte as coordenadas para um objeto Point Shapely
     point = Point(location)
@@ -175,7 +175,7 @@ def sel_heuristic(industry_id, rooms_list, apps_list, info_flows_list, ifr_flows
     for room in rooms:
         mifs[room.id] = {}
         location = room.location
-        polygon_shape = Polygon(location.coordinates)
+        polygon_shape = Polygon(location.industry_coordinates)
         x, y = polygon_shape.centroid.xy
         centroid_location = [x[0], y[0]]
 
